@@ -28,7 +28,8 @@ include_package_data = true
 
 [project.extras_require]
 test = [
-    'pytest'
+    'pytest',
+    'pytest-cov'
 ]
 
 [build-system]
