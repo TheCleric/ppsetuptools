@@ -65,7 +65,7 @@ def _replace_files(kwargs, caller_directory):
             try:
                 filename = kwargs[key].split('file:')[-1].strip()
                 with open(path.join(caller_directory, filename), 'r', encoding='utf-8') as toml_file_link:
-                    kwargs[key] = toml_file_link.read()
+                    kwargs[key] = toml_file_link.read().replace('\r\n', '\n')
             except:
                 # If we failed, just keep the value
                 pass

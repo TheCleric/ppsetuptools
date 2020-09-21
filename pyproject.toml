@@ -7,7 +7,8 @@ long_description = 'file: README.md'
 url = 'https://github.com/TheCleric/ppsetuptools'
 author = 'Adam Weeden'
 author_email = 'adamweeden@gmail.com'
-license = 'LGPL3'
+license = 'LGPL v3'
+license_file = 'file: LICENSE'
 classifiers = [
     'Development Status :: 4 - Beta',
     'Intended Audience :: Developers',
