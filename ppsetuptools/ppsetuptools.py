@@ -51,6 +51,10 @@ def _parse_kwargs(kwargs, caller_directory):
     long_description = kwargs.get('project', {}).get('long_description')
     if long_description and long_description.startswith('file:'):
         kwargs['project']['long_description_content_type'] = _get_mimetype(long_description.split('file:')[-1].lower())
+        print('long_description is a file reference: "{}"'.format(long_description))
+        print('Assigning long_description_content_type of "{}"'.format(
+            kwargs['project']['long_description_content_type'])
+        )
     kwargs = _replace_files(kwargs, caller_directory)
     return kwargs
 
