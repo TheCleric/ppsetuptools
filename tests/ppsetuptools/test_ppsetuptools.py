@@ -38,9 +38,7 @@ def test_setup():
 def test_replace_files():
     test_filename = 'test_readme.md'
     test_toml_dict = {
-        'project': {
-            'long_description': 'file: ' + path.join(_DATA_DIR, test_filename)
-        }
+        'long_description': 'file: ' + path.join(_DATA_DIR, test_filename)
     }
 
     with open(path.join(_HERE, _DATA_DIR, test_filename), 'r', encoding='utf-8') as test_file:
@@ -48,15 +46,13 @@ def test_replace_files():
 
     result = ppsetuptools._replace_files(test_toml_dict, _HERE)
 
-    assert result['project']['long_description'].strip() == test_file_contents.strip()
+    assert result['long_description'].strip() == test_file_contents.strip()
 
 
 def test_parse_kwargs():
     test_filename = 'test_readme.md'
     test_toml_dict = {
-        'project': {
-            'long_description': 'file: ' + path.join(_DATA_DIR, test_filename)
-        }
+        'long_description': 'file: ' + path.join(_DATA_DIR, test_filename)
     }
 
     here = path.abspath(path.dirname(__file__))
@@ -65,6 +61,6 @@ def test_parse_kwargs():
 
     result = ppsetuptools._parse_kwargs(test_toml_dict, here)
 
-    assert not result['project']['long_description'].startswith('file:')
-    assert result['project']['long_description_content_type'] == test_file_content_type
+    assert not result['long_description'].startswith('file:')
+    assert result['long_description_content_type'] == test_file_content_type
     assert test_file_content_type == 'text/markdown'
