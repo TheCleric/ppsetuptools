@@ -1,0 +1,18 @@
+[project]
+name = 'mock_project'
+project_name = 'mock_project'
+version = '0.0.1'
+description = 'A mock project'
+long_description = 'A longer mock project'
+url = 'https://github.com/TheCleric/mock_project'
+author = 'Me'
+author_email = 'me@emample.com'
+license = 'LGPL3'
+classifiers = [
+    'Mock Project'
+]
+keywords = 'mock project'
+install_requires = [
+    'setuptools'
+]
+include_package_data = true

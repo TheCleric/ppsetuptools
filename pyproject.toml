@@ -1,0 +1,41 @@
+[project]
+name = 'ppsetuptools'
+project_name = 'ppsetuptools'
+version = '0.9.0'
+description = 'Drop in replacement for setuptools that uses pyproject.toml files'
+long_description = 'file: README.md'
+long_description_content_type = 'text/markdown'
+url = 'https://github.com/TheCleric/ppsetuptools'
+author = 'Adam Weeden'
+author_email = 'adamweeden@gmail.com'
+license = 'LGPL3'
+classifiers = [
+    'Development Status :: 3 - Beta',
+    'Intended Audience :: Developers',
+    'Topic :: Software Development :: Libraries',
+    'License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.6',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8'
+]
+keywords = 'setuptools pyproject setup.py pyproject.toml replacement'
+install_requires = [
+    'setuptools',
+    'toml'
+]
+include_package_data = true
+
+[project.extras_require]
+test = [
+    'pytest',
+    'pytest-cov' # This will only work in python 3.5+
+]
+
+[build-system]
+requires = [
+    'setuptools',
+    'wheel',
+    'toml'
+]
+build-backend = 'setuptools.build_meta'
