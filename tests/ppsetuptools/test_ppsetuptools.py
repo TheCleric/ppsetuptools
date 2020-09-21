@@ -12,19 +12,23 @@ _HERE = path.abspath(path.dirname(__file__))
 
 
 def test_setup():
-    with open(path.join(_HERE, _DATA_DIR, 'test_pyproject.toml'), 'r') as test_toml_file:
-        test_toml_file_contents = test_toml_file.read()
-
-    test_toml_data = toml.loads(test_toml_file_contents)
-
-    setup_mock = MagicMock()
-    mo = mock_open(read_data=test_toml_file_contents.encode('utf-8'))
     old_setuptools_setup = ppsetuptools.setuptools_setup
-    ppsetuptools.setuptools_setup = setup_mock
-    with patch('builtins.open', mo):
-        ppsetuptools.setup()
+    
+    try:
+        with open(path.join(_HERE, _DATA_DIR, 'test_pyproject.toml'), 'r') as test_toml_file:
+            test_toml_file_contents = test_toml_file.read()
 
-    ppsetuptools.setuptools_setup = old_setuptools_setup
+        test_toml_data = toml.loads(test_toml_file_contents)
+
+        setup_mock = MagicMock()
+        mo = mock_open(read_data=test_toml_file_contents.encode('utf-8'))
+        ppsetuptools.setuptools_setup = setup_mock
+        with patch('builtins.open', mo):
+            ppsetuptools.setup()
+        ppsetuptools.setuptools_setup = old_setuptools_setup
+    except Exception as ex:
+        ppsetuptools.setuptools_setup = old_setuptools_setup
+        raise(ex)
 
     mo.assert_called_once()
     setup_mock.assert_called_once_with(**test_toml_data['project'])
