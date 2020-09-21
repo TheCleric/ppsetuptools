@@ -13,7 +13,7 @@ _HERE = path.abspath(path.dirname(__file__))
 
 def test_setup():
     old_setuptools_setup = ppsetuptools.setuptools_setup
-    
+
     try:
         with open(path.join(_HERE, _DATA_DIR, 'test_pyproject.toml'), 'r') as test_toml_file:
             test_toml_file_contents = test_toml_file.read()
@@ -30,7 +30,7 @@ def test_setup():
         ppsetuptools.setuptools_setup = old_setuptools_setup
         raise(ex)
 
-    mo.assert_called_once()
+    assert mo.call_count == 1
     setup_mock.assert_called_once_with(**test_toml_data['project'])
 
 
