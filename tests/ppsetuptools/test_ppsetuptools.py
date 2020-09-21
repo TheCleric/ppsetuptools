@@ -1,4 +1,3 @@
-import mimetypes
 from os import path
 from unittest.mock import MagicMock, patch, mock_open
 import builtins
@@ -31,7 +30,9 @@ def test_setup():
         raise(ex)
 
     assert mo.call_count == 1
-    setup_mock.assert_called_once_with(**test_toml_data['project'])
+    setup_mock.assert_called_once_with(
+        **ppsetuptools._filter_dict(test_toml_data['project'], ppsetuptools.valid_setup_params)
+    )
 
 
 def test_replace_files():
@@ -60,9 +61,10 @@ def test_parse_kwargs():
 
     here = path.abspath(path.dirname(__file__))
 
-    test_file_content_type = mimetypes.guess_type(test_filename)
+    test_file_content_type = ppsetuptools._get_mimetype(test_filename)
 
     result = ppsetuptools._parse_kwargs(test_toml_dict, here)
 
     assert not result['project']['long_description'].startswith('file:')
     assert result['project']['long_description_content_type'] == test_file_content_type
+    assert test_file_content_type == 'text/markdown'
