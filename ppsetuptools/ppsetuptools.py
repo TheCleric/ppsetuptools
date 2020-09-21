@@ -23,9 +23,11 @@ def setup(*args, **kwargs):
         pyproject_toml = pptoml.read()
 
     pyproject_data = toml.loads(pyproject_toml)
+    
+    kwargs_copy = kwargs.copy()
+    kwargs_copy.update(pyproject_data['project'])
 
-    kwargs = {**pyproject_data['project'], **kwargs}
-    kwargs = _parse_kwargs(kwargs, caller_directory)
+    kwargs = _parse_kwargs(kwargs_copy, caller_directory)
 
     return setuptools_setup(*args, **kwargs)
 
