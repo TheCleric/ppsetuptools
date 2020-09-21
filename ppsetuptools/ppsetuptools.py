@@ -9,6 +9,13 @@ import mimetypes
 setuptools_setup = setup
 
 # pylint: disable = function-redefined
+mimetype_overrides = {
+    'md': 'text/markdown'
+}
+
+valid_setup_params = ['name', 'version', 'description', 'long_description', 'long_description_content_type', 'url', 'author', 'author_email',
+                      'maintainer', 'maintainer_email', 'license', 'classifiers', 'keywords', 'install_requires', 'include_package_data', 'extras_require',
+                      'zip_safe', 'packages', 'scripts', 'package_data', 'data_files']
 
 
 def setup(*args, **kwargs):
@@ -23,21 +30,27 @@ def setup(*args, **kwargs):
         pyproject_toml = pptoml.read()
 
     pyproject_data = toml.loads(pyproject_toml)
-    
+
     kwargs_copy = kwargs.copy()
-    kwargs_copy.update(pyproject_data['project'])
+    kwargs_copy.update(_filter_dict(pyproject_data['project'], valid_setup_params))
 
     kwargs = _parse_kwargs(kwargs_copy, caller_directory)
 
+    print("Calling setuptools.setup with args: {}".format(args))
+    print("And kwargs:")
+    print(kwargs)
+
     return setuptools_setup(*args, **kwargs)
+
+
+def _filter_dict(kwargs, allowed_params):
+    return {k: v for k, v in kwargs.items() if k in allowed_params}
 
 
 def _parse_kwargs(kwargs, caller_directory):
     long_description = kwargs.get('project', {}).get('long_description')
     if long_description and long_description.startswith('file:'):
-        kwargs['project']['long_description_content_type'] = mimetypes.guess_type(
-            long_description.split('file:')[-1].lower()
-        )
+        kwargs['project']['long_description_content_type'] = _get_mimetype(long_description.split('file:')[-1].lower())
     kwargs = _replace_files(kwargs, caller_directory)
     return kwargs
 
@@ -56,3 +69,13 @@ def _replace_files(kwargs, caller_directory):
             kwargs[key] = _replace_files(kwargs[key], caller_directory)
 
     return kwargs
+
+
+def _get_mimetype(filename):
+    mimetype = mimetypes.guess_type(filename)
+    if mimetype and mimetype[0]:
+        return mimetype[0]
+
+    extension = filename.split('.')[-1]
+
+    return mimetype_overrides.get(extension)
