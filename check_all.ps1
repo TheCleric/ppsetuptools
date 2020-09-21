@@ -1,7 +1,7 @@
 Remove-Item -Recurse -Force -Confirm:$false dist `
-    && Remove-Item -Recurse -Force -Confirm:$false build `
-    && Remove-Item -Recurse -Force -Confirm:$false *.egginfo `
-    && pytest tests --doctest-modules --cov=ppsetuptools `
+    || Remove-Item -Recurse -Force -Confirm:$false build `
+    || Remove-Item -Recurse -Force -Confirm:$false *.egginfo `
+    || pre-commit install `
     && python setup.py sdist bdist_wheel `
-    && twine check dist/* `
-    && pre-commit install
+    && pytest tests --doctest-modules --cov=ppsetuptools `
+    && twine check dist/*

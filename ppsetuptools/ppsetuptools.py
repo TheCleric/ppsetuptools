@@ -15,7 +15,7 @@ mimetype_overrides = {
 
 valid_setup_params = ['name', 'version', 'description', 'long_description', 'long_description_content_type', 'url', 'author', 'author_email',
                       'maintainer', 'maintainer_email', 'license', 'classifiers', 'keywords', 'install_requires', 'include_package_data', 'extras_require',
-                      'zip_safe', 'packages', 'scripts', 'package_data', 'data_files']
+                      'zip_safe', 'packages', 'scripts', 'package_data', 'data_files', 'entry_points']
 
 
 def setup(*args, **kwargs):
