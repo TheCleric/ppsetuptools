@@ -5,8 +5,13 @@ for python 3.5+ projects
 
 ## Usage
 
+To install run `pip install ppsetuptools` in your project.
+
 Place your project settings in the `[project]` table of your pyproject.toml.
-Replace setuptools import in your project with an import of ppsetuptools.
+Also ensure that `ppsetuptools` is included in your `[build-system]` table
+in the `requires` list.
+
+Replace setuptools import in your `setup.py` with an import of ppsetuptools.
 ppsetuptools exposes all functions from setuptools, and in addition will map
 your `pyproject.toml` data to the call to `setuptools.setup` for you.
 
