@@ -33,8 +33,8 @@ test = [
 
 [build-system]
 requires = [
-    'setuptools >= 40.8.0',
-    'wheel >= 0.35.1',
-    'toml >= 0.10.1'
+    'setuptools',
+    'wheel',
+    'toml'
 ]
 build-backend = 'setuptools.build_meta'
