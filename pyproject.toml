@@ -10,7 +10,7 @@ author = 'Adam Weeden'
 author_email = 'adamweeden@gmail.com'
 license = 'LGPL3'
 classifiers = [
-    'Development Status :: 3 - Beta',
+    'Development Status :: 4 - Beta',
     'Intended Audience :: Developers',
     'Topic :: Software Development :: Libraries',
     'License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)',
