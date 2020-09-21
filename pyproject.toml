@@ -39,7 +39,7 @@ test = [
 
 [build-system]
 requires = [
-    'setuptools',
+    'setuptools>=38.6.0',
     'wheel',
     'toml',
     'twine'
