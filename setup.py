@@ -7,7 +7,7 @@ sys.path.append(path.join(here, 'ppsetuptools'))
 import ppsetuptools
 
 ppsetuptools.setup(
-    packages=ppsetuptools.find_packages(
+    packages=ppsetuptools.find_packages( # type: ignore
         exclude=["tests", "tests.*"]
     ),
 )

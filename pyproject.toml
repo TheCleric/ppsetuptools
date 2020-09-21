@@ -27,6 +27,11 @@ install_requires = [
 include_package_data = true
 
 [project.extras_require]
+dev = [
+    'pre-commit',
+    'pytest',
+    'pytest-cov' # This will only work in python 3.5+
+]
 test = [
     'pytest',
     'pytest-cov' # This will only work in python 3.5+
@@ -36,6 +41,7 @@ test = [
 requires = [
     'setuptools',
     'wheel',
-    'toml'
+    'toml',
+    'twine'
 ]
 build-backend = 'setuptools.build_meta'
