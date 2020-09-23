@@ -1,12 +1,11 @@
 # pylint:disable = unused-wildcard-import
+import setuptools
 from setuptools import *
 import toml
 from codecs import open
 from os import path
 import inspect
 import mimetypes
-
-setuptools_setup = setup
 
 # pylint: disable = function-redefined
 mimetype_overrides = {
@@ -40,7 +39,7 @@ def setup(*args, **kwargs):
     print('And kwargs:')
     print(kwargs)
 
-    return setuptools_setup(*args, **kwargs)
+    return setuptools.setup(*args, **kwargs)
 
 
 def _filter_dict(kwargs, allowed_params):
