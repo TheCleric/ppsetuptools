@@ -3,7 +3,7 @@ PACKAGE_NAME := ppsetuptools
 TESTS_DIR := tests
 
 autopep8:
-	autopep8 --in-place --recursive *.py ppsetuptools tests
+	autopep8 --in-place --recursive *.py $(PACKAGE_NAME) $(TESTS_DIR)
 
 clean:
 	rm -rf dist
