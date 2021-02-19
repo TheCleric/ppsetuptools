@@ -21,23 +21,27 @@ classifiers = [
 ]
 keywords = 'setuptools pyproject setup.py pyproject.toml replacement'
 dependencies = [
-    'setuptools',
+    'setuptools>=38.6.0',
     'toml',
 ]
 include_package_data = true
 
 [project.optional-dependencies]
 dev = [
+    'autopep8',
+    'isort',
     'pre-commit',
-    'pytest',
-    'pytest-cov', # This will only work in python 3.5+
     'setuptools',
     'twine',
+    'upgrade-ensurepip',
     'wheel',
 ]
 test = [
+    'mypy',
+    'pydantic',
+    'pylint',
     'pytest',
-    'pytest-cov' # This will only work in python 3.5+
+    'pytest-cov',
 ]
 
 [build-system]
@@ -45,9 +49,27 @@ requires = [
     'setuptools>=38.6.0',
     'wheel',
     'toml',
-    'twine'
+    'twine',
 ]
 build-backend = 'setuptools.build_meta'
 
 [tool.autopep8]
 max_line_length = 120
+
+[tool.pylint.pep8]
+'max-line-length' = 120
+
+[tool.pylint.MASTER]
+ignore = 'venv'
+
+[tool.pylint.'MESSAGES CONTROL']
+enable = [
+    'errors',
+    'warnings',
+]
+disable = [
+    'missing-class-docstring',
+    'missing-function-docstring',
+    'missing-module-docstring',
+    'too-few-public-methods',
+]

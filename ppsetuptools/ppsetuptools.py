@@ -1,20 +1,24 @@
 # pylint:disable = unused-wildcard-import
-import setuptools
-from setuptools import *
-import toml
-from codecs import open
-from os import path
+import codecs
 import inspect
 import mimetypes
+from os import path
+
+import setuptools  # type: ignore
+import toml
+from setuptools import *  # pylint: disable=function-redefined,redefined-builtin,unused-wildcard-import,wildcard-import
 
 # pylint: disable = function-redefined
 mimetype_overrides = {
     'md': 'text/markdown'
 }
 
-valid_setup_params = ['name', 'version', 'description', 'long_description', 'long_description_content_type', 'url', 'author', 'author_email',
-                      'maintainer', 'maintainer_email', 'license', 'classifiers', 'keywords', 'install_requires', 'include_package_data', 'extras_require',
-                      'zip_safe', 'packages', 'scripts', 'package_data', 'data_files', 'entry_points']
+valid_setup_params = ['name', 'version', 'description', 'long_description', 'long_description_content_type', 'url',
+                      'author', 'author_email', 'maintainer', 'maintainer_email', 'license', 'classifiers', 'keywords',
+                      'install_requires', 'include_package_data', 'extras_require', 'zip_safe', 'packages', 'scripts',
+                      'package_data', 'data_files', 'entry_points']
+
+open = codecs.open  # pylint:disable=redefined-builtin
 
 
 def setup(*args, **kwargs):
@@ -22,7 +26,7 @@ def setup(*args, **kwargs):
 
     try:
         caller_directory = path.abspath(path.dirname(inspect.stack()[1].filename))
-    except:
+    except:  # pylint: disable=bare-except
         pass
 
     with open(path.join(caller_directory, 'pyproject.toml'), 'r', encoding='utf-8') as pptoml:
@@ -78,7 +82,7 @@ def _replace_files(kwargs, caller_directory):
                 filename = kwargs[key].split('file:')[-1].strip()
                 with open(path.join(caller_directory, filename), 'r', encoding='utf-8') as toml_file_link:
                     kwargs[key] = toml_file_link.read().replace('\r\n', '\n')
-            except:
+            except:  # pylint: disable=bare-except
                 # If we failed, just keep the value
                 pass
         elif isinstance(kwargs[key], dict):

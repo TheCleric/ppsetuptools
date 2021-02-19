@@ -1,7 +1,7 @@
 # ppsetuptools => pyproject setuptools
 
 A drop in replacement for python setuptools that uses pyproject.toml files
-for python 3.5+ projects
+for python 3.6+ projects
 
 ## Usage
 

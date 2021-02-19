@@ -1,1 +1,1 @@
-from .ppsetuptools import *
+from .ppsetuptools import *  # pylint: disable=redefined-builtin
