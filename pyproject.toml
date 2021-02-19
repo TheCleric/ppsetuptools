@@ -22,7 +22,7 @@ classifiers = [
 keywords = 'setuptools pyproject setup.py pyproject.toml replacement'
 dependencies = [
     'setuptools',
-    'toml'
+    'toml',
 ]
 include_package_data = true
 
@@ -30,7 +30,10 @@ include_package_data = true
 dev = [
     'pre-commit',
     'pytest',
-    'pytest-cov' # This will only work in python 3.5+
+    'pytest-cov', # This will only work in python 3.5+
+    'setuptools',
+    'twine',
+    'wheel',
 ]
 test = [
     'pytest',

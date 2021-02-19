@@ -22,6 +22,15 @@ def test_setup():
 
     test_toml_data = toml.loads(test_toml_file_contents)
 
+    test_toml_data['project']['install_requires'] = list(
+        set(
+            test_toml_data['project']['install_requires'] + test_toml_data['project']['dependencies']
+        )
+    )
+
+    test_toml_data['project']['optional-dependencies'].update(test_toml_data['project']['extras_require'])
+    test_toml_data['project']['extras_require'] = test_toml_data['project']['optional-dependencies']
+
     mo = mock_open(read_data=test_toml_file_contents.encode('utf-8'))
     setup_mock = MagicMock()
 
