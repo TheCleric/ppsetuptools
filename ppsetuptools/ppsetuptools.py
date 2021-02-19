@@ -30,6 +30,19 @@ def setup(*args, **kwargs):
 
     pyproject_data = toml.loads(pyproject_toml)
 
+    # Treat dependencies as install_requires
+    dependencies = pyproject_data["project"].get("dependencies")
+    if dependencies:
+        install_requires = pyproject_data["project"].get("install_requires", [])
+        pyproject_data["project"]["install_requires"] = list(set(install_requires + dependencies))
+
+    # Treat optional-dependencies as extra_requires
+    optionals = pyproject_data["project"].get("optional-dependencies")
+    if optionals:
+        extras = pyproject_data["project"].get("extras_require", {})
+        optionals.update(extras)
+        pyproject_data["project"]["extras_require"] = optionals
+
     kwargs_copy = kwargs.copy()
     kwargs_copy.update(_filter_dict(pyproject_data['project'], valid_setup_params))
 
