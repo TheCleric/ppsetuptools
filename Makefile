@@ -1,3 +1,4 @@
+REQUIRE_PIP  := true
 PACKAGE_NAME := ppsetuptools
 TESTS_DIR := tests
 
@@ -15,13 +16,13 @@ coverage:
 	pytest -v --doctest-modules --cov=$(PACKAGE_NAME) --cov-fail-under=100 --cov-report term-missing --cov-report html $(TESTS_DIR)
 
 install: upgrade-pip
-	pip install -e .
+	PIP_REQUIRE_VIRTUALENV=$(REQUIRE_PIP) pip install -e .
 
 install-dev: upgrade-pip
-	pip install -e .[dev,test]
+	PIP_REQUIRE_VIRTUALENV=$(REQUIRE_PIP) pip install -e .[dev,test]
 
 install-test: upgrade-pip
-	pip install -e .[test]
+	PIP_REQUIRE_VIRTUALENV=$(REQUIRE_PIP) pip install -e .[test]
 
 isort:
 	isort *.py $(PACKAGE_NAME)/ $(TESTS_DIR)/
@@ -36,8 +37,8 @@ pylint:
 	find . -type f -name "*.py" | grep -v venv | grep -v build | xargs python3 -m pylint
 
 setup: clean upgrade-pip
-	pip install setuptools wheel twine toml
-	pip install setuptools --upgrade
+	PIP_REQUIRE_VIRTUALENV=$(REQUIRE_PIP) pip install setuptools wheel twine toml
+	PIP_REQUIRE_VIRTUALENV=$(REQUIRE_PIP) pip install setuptools --upgrade
 	python setup.py sdist bdist_wheel
 
 twine-check: setup
@@ -47,8 +48,8 @@ twine-upload: twine-check
 	twine upload dist/*
 
 upgrade-pip:
-	pip install --disable-pip-version-check upgrade-ensurepip
-	python -m upgrade_ensurepip
+	PIP_REQUIRE_VIRTUALENV=$(REQUIRE_PIP) pip install --disable-pip-version-check upgrade-ensurepip
+	PIP_REQUIRE_VIRTUALENV=$(REQUIRE_PIP) python -m upgrade_ensurepip
 
 ACT_EXISTS := $(shell act --help 2> /dev/null)
 

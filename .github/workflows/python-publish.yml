@@ -21,4 +21,4 @@ jobs:
         env:
           TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-        run: make twine-upload
+        run: make REQUIRE_PIP=false twine-upload

@@ -3,13 +3,13 @@ import codecs
 import inspect
 import mimetypes
 from os import path
+from typing import Any, Dict, List, Optional
 
-import setuptools  # type: ignore
+import setuptools
 import toml
 from setuptools import *  # pylint: disable=function-redefined,redefined-builtin,unused-wildcard-import,wildcard-import
 
-# pylint: disable = function-redefined
-mimetype_overrides = {
+mimetype_overrides: Dict[str, str] = {
     'md': 'text/markdown'
 }
 
@@ -18,16 +18,16 @@ valid_setup_params = ['name', 'version', 'description', 'long_description', 'lon
                       'install_requires', 'include_package_data', 'extras_require', 'zip_safe', 'packages', 'scripts',
                       'package_data', 'data_files', 'entry_points']
 
+__all__ = setuptools.__all__
+
 open = codecs.open  # pylint:disable=redefined-builtin
 
 
-def setup(*args, **kwargs):
-    caller_directory = '.'
-
+def setup(*args: List[Any], **kwargs: Dict[str, Any]) -> Any:  # pylint: disable=function-redefined
     try:
         caller_directory = path.abspath(path.dirname(inspect.stack()[1].filename))
     except:  # pylint: disable=bare-except
-        pass
+        caller_directory = '.'
 
     with open(path.join(caller_directory, 'pyproject.toml'), 'r', encoding='utf-8') as pptoml:
         pyproject_toml = pptoml.read()
@@ -59,11 +59,11 @@ def setup(*args, **kwargs):
     return setuptools.setup(*args, **kwargs)
 
 
-def _filter_dict(kwargs, allowed_params):
+def _filter_dict(kwargs: Dict[str, Any], allowed_params: List[str]) -> Dict[str, Any]:
     return {k: v for k, v in kwargs.items() if k in allowed_params}
 
 
-def _parse_kwargs(kwargs, caller_directory):
+def _parse_kwargs(kwargs: Dict[str, Any], caller_directory: str) -> Dict[str, Any]:
     long_description = kwargs.get('long_description')
     if long_description and long_description.startswith('file:'):
         kwargs['long_description_content_type'] = _get_mimetype(long_description.split('file:')[-1].lower())
@@ -75,7 +75,7 @@ def _parse_kwargs(kwargs, caller_directory):
     return kwargs
 
 
-def _replace_files(kwargs, caller_directory):
+def _replace_files(kwargs: Dict[str, Any], caller_directory: str) -> Dict[str, Any]:
     for key in kwargs.keys():
         if isinstance(kwargs[key], str) and kwargs[key].startswith('file:'):
             try:
@@ -91,7 +91,7 @@ def _replace_files(kwargs, caller_directory):
     return kwargs
 
 
-def _get_mimetype(filename):
+def _get_mimetype(filename: str) -> Optional[str]:
     mimetype = mimetypes.guess_type(filename)
     if mimetype and mimetype[0]:
         return mimetype[0]

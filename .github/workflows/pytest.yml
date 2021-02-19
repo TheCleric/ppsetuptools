@@ -18,4 +18,4 @@ jobs:
         with:
           python-version: "3.6"
       - name: Run tests
-        run: make install-test setup coverage twine-check
+        run: make REQUIRE_PIP=false install-test setup coverage twine-check
