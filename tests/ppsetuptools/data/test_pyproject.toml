@@ -9,10 +9,23 @@ author = 'Me'
 author_email = 'me@emample.com'
 license = 'LGPL3'
 classifiers = [
-    'Mock Project'
+    'Mock Project',
 ]
 keywords = 'mock project'
 install_requires = [
-    'setuptools'
+    'setuptools',
+]
+dependencies = [
+    'other',
 ]
 include_package_data = true
+
+[project.extras_require]
+dev = [
+    'dev_dependency',
+]
+
+[project.optional-dependencies]
+test = [
+    'test_dependency',
+]

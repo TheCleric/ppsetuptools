@@ -14,12 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v2.2.1
         with:
-          python-version: "3.5"
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -e .[test]
+          python-version: "3.6"
       - name: Run tests
-        run: pytest tests --doctest-modules --cov=ppsetuptools
+        run: make install-test setup coverage twine-check

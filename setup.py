@@ -1,5 +1,5 @@
-from os import path
 import sys
+from os import path
 
 
 def main():
@@ -7,10 +7,10 @@ def main():
     here = path.abspath(path.dirname(__file__))
 
     sys.path.append(path.join(here, 'ppsetuptools'))
-    import ppsetuptools
+    import ppsetuptools  # pylint: disable=import-outside-toplevel
 
     ppsetuptools.setup(
-        packages=ppsetuptools.find_packages(  # type: ignore
+        packages=ppsetuptools.find_packages(
             exclude=["tests", "tests.*"]
         ),
     )
