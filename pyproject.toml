@@ -1,7 +1,7 @@
 [project]
 name = 'ppsetuptools'
 project_name = 'ppsetuptools'
-version = '1.0'
+version = '1.0.1'
 description = 'Drop in replacement for setuptools that uses pyproject.toml files'
 long_description = 'file: README.md'
 url = 'https://github.com/TheCleric/ppsetuptools'
