@@ -76,7 +76,7 @@ def _parse_kwargs(kwargs: Dict[str, Any], caller_directory: str) -> Dict[str, An
 
 
 def _replace_files(kwargs: Dict[str, Any], caller_directory: str) -> Dict[str, Any]:
-    for key in kwargs.keys():
+    for key, value in kwargs.items():
         if isinstance(kwargs[key], str) and kwargs[key].startswith('file:'):
             try:
                 filename = kwargs[key].split('file:')[-1].strip()
@@ -85,7 +85,7 @@ def _replace_files(kwargs: Dict[str, Any], caller_directory: str) -> Dict[str, A
             except:  # pylint: disable=bare-except
                 # If we failed, just keep the value
                 pass
-        elif isinstance(kwargs[key], dict):
+        elif isinstance(value, dict):
             kwargs[key] = _replace_files(kwargs[key], caller_directory)
 
     return kwargs
