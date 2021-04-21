@@ -1,7 +1,7 @@
 [project]
 name = 'ppsetuptools'
 project_name = 'ppsetuptools'
-version = '2.0.0'
+version = '2.0.1'
 classifiers = [
     'Development Status :: 4 - Beta',
     'Intended Audience :: Developers',
