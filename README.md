@@ -13,7 +13,8 @@ in the `requires` list.
 
 Replace setuptools import in your `setup.py` with an import of ppsetuptools.
 ppsetuptools exposes all functions from setuptools, and in addition will map
-your `pyproject.toml` data to the call to `setuptools.setup` for you.
+your `pyproject.toml` data to the call to `setuptools.setup` for you (via
+PEP-621 compliant entries).
 
 ### Example `pyproject.toml`
 
@@ -22,7 +23,7 @@ your `pyproject.toml` data to the call to `setuptools.setup` for you.
 name = 'my_package'
 project_name = 'my_package'
 version = '1.0.0'
-long_description = 'file: README.md'
+readme = 'README.md'
 install_requires = [
     'setuptools',
     'toml'
@@ -46,20 +47,16 @@ from ppsetuptools import setup
 setup()
 ```
 
-### File references
-
-ppsetuptools will attempt to replace any strings beginning with "file:" with the
-file's contents. For the long_description entry, ppsetuptools will also attempt
-to fill long_description_content_type for you based on the filename.
-
 ### File locations
 
 As of now, the library attempts to find a `pyproject.toml` file in the same
 directory as the python file that called it. So if calling directly from
 `setup.py`, ensure that your `pyproject.toml` file is in the same directory.
 
-As well any file references will attempt to be followed from this location.
-E.g., if including a `file: README.md` reference, ppsetuptools will look for
+As well any file references (such as the `readme`) will attempt to be followed
+from this location.
+
+E.g., if including a `redme = 'README.md'` value, ppsetuptools will look for
 `README.md` in the same directory as the file that called it.
 
 ### Function support
@@ -77,8 +74,3 @@ setup(
     find_packages(exclude=['tests'])
 )
 ```
-
-## PEP 621
-
-NOTE: This is not currently PEP 621 as that PEP is still in draft status. This
-project will be made PEP 621 compliant in the future if the PEP is accepted.
