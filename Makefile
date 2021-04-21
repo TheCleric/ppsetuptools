@@ -50,6 +50,7 @@ twine-upload: twine-check
 upgrade-pip:
 	PIP_REQUIRE_VIRTUALENV=$(REQUIRE_PIP) pip install --disable-pip-version-check upgrade-ensurepip
 	PIP_REQUIRE_VIRTUALENV=$(REQUIRE_PIP) python -m upgrade_ensurepip
+	PIP_REQUIRE_VIRTUALENV=$(REQUIRE_PIP) python -m pip install pip --upgrade
 
 ACT_EXISTS := $(shell act --help 2> /dev/null)
 

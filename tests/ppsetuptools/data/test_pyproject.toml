@@ -3,29 +3,32 @@ name = 'mock_project'
 project_name = 'mock_project'
 version = '0.0.1'
 description = 'A mock project'
-long_description = 'A longer mock project'
+readme = 'test_readme.md'
 url = 'https://github.com/TheCleric/mock_project'
-author = 'Me'
-author_email = 'me@emample.com'
-license = 'LGPL3'
+authors = [
+    { name = 'Me', email = 'me@emample.com' }
+]
 classifiers = [
     'Mock Project',
 ]
-keywords = 'mock project'
+include_package_data = true
+keywords = ['mock', 'project']
+license = { text =  'LGPL3' }
+maintainers = [
+    { email = 'you@yout.com' }
+]
+requires-python = '>=3.6'
 install_requires = [
     'setuptools',
 ]
 dependencies = [
     'other',
 ]
-include_package_data = true
 
-[project.extras_require]
+[project.optional-dependencies]
 dev = [
     'dev_dependency',
 ]
-
-[project.optional-dependencies]
 test = [
     'test_dependency',
 ]

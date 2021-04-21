@@ -2,13 +2,6 @@
 name = 'ppsetuptools'
 project_name = 'ppsetuptools'
 version = '1.0.1'
-description = 'Drop in replacement for setuptools that uses pyproject.toml files'
-long_description = 'file: README.md'
-url = 'https://github.com/TheCleric/ppsetuptools'
-author = 'Adam Weeden'
-author_email = 'adamweeden@gmail.com'
-license = 'LGPL v3'
-license_file = 'file: LICENSE'
 classifiers = [
     'Development Status :: 4 - Beta',
     'Intended Audience :: Developers',
@@ -19,12 +12,30 @@ classifiers = [
     'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8'
 ]
-keywords = 'setuptools pyproject setup.py pyproject.toml replacement'
+description = 'Drop in replacement for setuptools that uses pyproject.toml files'
+include_package_data = true
+keywords = [
+    'setuptools',
+    'pyproject',
+    'setup.py',
+    'pyproject.toml',
+    'replacement',
+    'pep621',
+    'pep-621',
+]
+license = { file = 'LICENSE' }
+readme = 'README.md'
+requires-python = '>=3.6'
+urls = { repository = 'https://github.com/TheCleric/ppsetuptools' }
+
 dependencies = [
     'setuptools>=38.6.0',
     'toml',
 ]
-include_package_data = true
+
+[[project.authors]]
+name = 'Adam Weeden'
+email = 'adamweeden@gmail.com'
 
 [project.optional-dependencies]
 dev = [
@@ -55,6 +66,9 @@ build-backend = 'setuptools.build_meta'
 
 [tool.autopep8]
 max_line_length = 120
+
+[tool.isort]
+line_length = 120
 
 [tool.pylint.pep8]
 'max-line-length' = 120
