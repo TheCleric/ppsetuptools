@@ -44,7 +44,7 @@ def _contributor_transform(contributors: List[Dict[str, str]]) -> Tuple[Optional
                 name = contributor.get('name')
                 email = contributor.get('email')
                 if name and email:
-                    contributor_names.append('{} <{}>'.format(name, email))
+                    contributor_emails.append('{} <{}>'.format(name, email))
                 elif name:
                     contributor_names.append(name)
                 elif email:
