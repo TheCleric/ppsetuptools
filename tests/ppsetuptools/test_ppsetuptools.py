@@ -120,8 +120,8 @@ def test_parse_kwargs() -> None:
         _HERE
     )
     assert result['long_description_content_type'] == test_file_content_type
-    assert result['author'] == test_toml_dict['authors'][0]['name'] + " <" + test_toml_dict['authors'][0]['email'] + ">"
-    assert result['maintainer'] == test_toml_dict['maintainers'][0]['name'] + \
+    assert result['author_email'] == test_toml_dict['authors'][0]['name'] + " <" + test_toml_dict['authors'][0]['email'] + ">"
+    assert result['maintainer_email'] == test_toml_dict['maintainers'][0]['name'] + \
         " <" + test_toml_dict['maintainers'][0]['email'] + ">"
 
 
@@ -133,8 +133,8 @@ def test_contributor_transform() -> None:
         }
     ]
     author, author_email = ppsetuptools._contributor_transform(authors)  # pylint: disable=protected-access
-    assert author == 'Me <me@me.com>'
-    assert author_email is None
+    assert author_email == 'Me <me@me.com>'
+    assert author is None
 
 
 def test_contributor_transform_no_name() -> None:
