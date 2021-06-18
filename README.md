@@ -33,6 +33,7 @@ include_package_data = true
 [build-system]
 requires = [
     'setuptools >= 40.8.0',
+    'ppsetuptools',
     'wheel >= 0.35.1',
     'toml >= 0.10.1'
 ]
