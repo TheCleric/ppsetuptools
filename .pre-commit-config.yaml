@@ -14,5 +14,5 @@ repos:
       - id: mixed-line-ending
         fix: lf
       - id: no-commit-to-branch
-        args: [--branch, master]
+        args: [--branch, main]
       - id: trailing-whitespace
